@@ -1,0 +1,149 @@
+package com.company;
+
+public interface Alimentavel {
+
+    public void alimentar();
+}
+
+package com.company;
+
+public abstract class  Animal implements Alimentavel{
+
+    private String nome;
+    private int idade;
+    private String especie;
+    private Boolean alimentado;
+
+    public abstract void emitirSom();
+
+    public Animal(String nome, int idade, String especie, Boolean alimentado){
+        this.nome = nome;
+        this.idade = idade;
+        this.especie = especie;
+        this.alimentado = alimentado;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public Boolean getAlimentado(){
+        return alimentado;
+    }
+
+    public void setAlimentado(){
+        this.alimentado = true;
+    }
+
+}
+
+
+
+package com.company;
+
+public  class Ave extends Animal {
+
+    private String tipoBico;
+
+    public Ave(String nome, int idade, String especie, Boolean alimentado, String tipoBico) {
+        super(nome, idade, especie, alimentado);
+        this.tipoBico = tipoBico;
+    }
+
+
+    @Override
+    public void emitirSom() {
+        System.out.println("pru");
+
+    }
+
+    @Override
+    public void alimentar() {
+
+    }
+}
+
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Ave avinha = new Ave("paulo", 2, "gente", false, "bicudinho");
+        Ave raissinha = new Ave("raissinha", 5, "linda", true, "bicudona");
+
+        Zoologico zoo = new Zoologico();
+
+        zoo.adicionarAnimal(avinha);
+        zoo.adicionarAnimal(raissinha);
+
+        zoo.listarAnimais();
+
+        zoo.alimentarAnimais();
+
+    }
+}
+
+package com.company;
+
+public  class Réptil extends Animal {
+
+    private double tempetaturaCorporal ;
+
+
+    public Réptil(String nome, int idade, String especie, Boolean alimentado, double tempetaturaCorporal) {
+        super(nome, idade, especie, alimentado);
+        this.tempetaturaCorporal = tempetaturaCorporal;
+    }
+
+
+    @Override
+    public void emitirSom(){
+        System.out.println("aaaaaaaaaaaaa");
+    }
+
+    @Override
+    public void alimentar() {
+
+    }
+}
+
+package com.company;
+
+import java.util.ArrayList;
+import java.util.List;
+
+    public class Zoologico {
+
+
+        private List<Animal> animais;
+
+        public Zoologico() {
+            animais = new ArrayList<>();
+        }
+
+        public void adicionarAnimal(Animal animalzinho) {
+            animais.add(animalzinho);
+        }
+
+
+        public void listarAnimais() {
+            for (int i = 0; i < animais.size(); i++) {
+                System.out.println("--> " + (animais.get(i)).getNome());
+            }
+        }
+
+        public void alimentarAnimais() {
+            for (int i = 0; i < animais.size(); i++) {
+                if (!(animais.get(i).getAlimentado())) {
+                    (animais.get(i)).alimentar();
+                    (animais.get(i)).setAlimentado();
+                    System.out.println((animais.get(i)).getNome() + " comeu");
+
+                }
+                else{
+                    System.out.println((animais.get(i)).getNome() + " já está alimentado");
+                }
+            }
+        }
+    }
